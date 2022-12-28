@@ -12,8 +12,7 @@ class Jamaah extends Model
     protected $fillable = [
         'full_name',
         'nohp',
-        'user_id',
-        'service_id'
+        'user_id'
     ];
 
     public function user()

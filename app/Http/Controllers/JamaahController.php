@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Jamaah;
 use App\Models\Order;
+use App\Models\Service;
 
 
 class JamaahController extends Controller
@@ -26,9 +27,12 @@ class JamaahController extends Controller
     {
         return view('jamaah.create', compact('order'));
     }
-    public function Tambah_Jamaah(Order $order, Request $request)
+    public function Tambah_Jamaah(Service $service, Request $request)
     {
         $user_id = Auth::id();
+        //Panggil Service 
+        $service_id = $service->id;
+       
        
 
         $request->validate([
@@ -41,7 +45,8 @@ class JamaahController extends Controller
                 Jamaah::create([
                     'full_name' => $request->full_name,
                     'nohp' => $request->nohp,
-                    'user_id' => $user_id
+                    'user_id' => $user_id,
+                    'service_id' => $service_id
                 ]);
          
            return Redirect::route('index_order');
@@ -54,7 +59,7 @@ class JamaahController extends Controller
 
 
        //insert data to db
-       public function store_jamaah(Request $request)
+       public function store_jamaah(Service $service, Request $request)
        {
            $user_id = Auth::id();
           
